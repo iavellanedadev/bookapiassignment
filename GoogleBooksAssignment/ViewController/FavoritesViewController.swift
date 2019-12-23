@@ -83,7 +83,9 @@ extension FavoritesViewController: UITableViewDelegate
         let detailVC = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
         detailVC.viewModel = viewModel
         detailVC.hidesBottomBarWhenPushed = true
+        detailVC.hideButton = true
         navigationController?.view.backgroundColor = .white
         navigationController?.pushViewController(detailVC, animated: true)
+        
     }
 }

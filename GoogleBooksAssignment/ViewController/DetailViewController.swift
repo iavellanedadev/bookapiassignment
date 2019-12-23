@@ -30,11 +30,18 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var favoriteButton: UIButton!
     
+    var hideButton: Bool = false
+    
     var viewModel: ViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDetails()
+        
+        if hideButton
+        {
+            favoriteButton.isHidden = true
+        }
         // Do any additional setup after loading the view.
     }
     @IBAction func urlTouch(_ sender: UIButton) {
