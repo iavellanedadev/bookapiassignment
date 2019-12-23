@@ -62,6 +62,8 @@ class DetailViewController: UIViewController {
 
           present(alertController, animated: true, completion: nil)
         
+        favoriteButton.isHidden = true
+
     }
     
     private func setupDetails()

@@ -88,4 +88,15 @@ extension FavoritesViewController: UITableViewDelegate
         navigationController?.pushViewController(detailVC, animated: true)
         
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete
+        {
+            let book = books[indexPath.row]
+            //delete core city, delete datasource city, reload the table view
+            
+            CoreManager.shared.delete(book)
+            books.remove(at: indexPath.row)
+        }
+    }
 }

@@ -74,6 +74,32 @@ final class CoreManager
         print("Book Saved: \(book.name) - \(book.author)")
     }
     
+    func delete(_ book: Book)
+    {
+        let fetchRequest = NSFetchRequest<CoreBook>(entityName: "CoreBook")
+        
+        let namePredicate = NSPredicate(format: "name==%@", book.name)
+        let idPredicate =  NSPredicate(format: "uid==%@", book.id)
+        let compound = NSCompoundPredicate(andPredicateWithSubpredicates: [idPredicate, namePredicate])
+        fetchRequest.predicate = compound
+        
+        do {
+            let coreBooks = try context.fetch(fetchRequest) //query coredata for the data
+            
+            guard let core = coreBooks.first else {return} //coredata context fetch ALWAYS returns result set in array, grab the data in the first index
+            context.delete(core) //remove that
+            
+            saveContext() //save the context, else the changes will not reflect throughout the core data
+            print("Deleted Book: \(book.name)")
+
+        }
+        catch{
+            print("Couldn't delete: \(error.localizedDescription)")
+            
+        }
+        
+    }
+    
     //MARK: Helper
     func saveContext()
     {
